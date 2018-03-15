@@ -1,0 +1,23 @@
+from tweepy import Stream
+from tweepy import OAuthHandler
+from tweepy.streaming import StreamListener
+
+ckey = 'IvxDCRlrz8R5u3xbDMlS9m3gJ'
+csecret = 'C2JGalAjrnojupgeIK6hFZE2fHUjtiftKHKVubnVR28Tun9MCR'
+atoken = '974356294877421569-1KMEjcGNKaIuFwcomQqwG3a7LxhjRIE'
+asecret = 'LIKwuIt1iOE5fTzEO4jEZ9GBsPpGEG6IG3pFeisxmmu0u'
+
+class listener(StreamListener):
+
+    def on_data(self, data):
+        print(data)
+        return True
+
+    def on_error(self, status):
+        print (status)
+
+
+auth= OAuthHandler(ckey, csecret)
+auth.set_access_token(atoken, asecret)
+twitterStream = Stream(auth, listener())
+twitterStream.filter(track=["TRUMP"])
